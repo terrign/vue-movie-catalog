@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import UserInfo from "./UserInfo.vue"
-import MovieSearch from "./MovieSearch.vue"
+import MovieSearch from './MovieSearch.vue';
 </script>
 
 <template>

@@ -1,1 +1,63 @@
-@import "./base.css";
+:root {
+  font-size: 16px;
+  --color-light-blue: #b9dbed;
+  --color-light-gray: #d1d1d1;
+  --color-gray: #8f8f8f;
+}
+
+:root {
+  --header-bg: var(--color-light-blue);
+  --button-hover: var(--color-light-blue);
+  --inactive-button-color: var(--color-gray);
+  --content-horizontal-padding: 3rem;
+  --border-light: var(--color-light-gray);
+  --border-dark: var(--color-gray);
+}
+
+body {
+  min-height: 100vh;
+  max-width: 1280px;
+  height: 1px;
+  line-height: 1rem;
+  margin: 0 auto;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  height: 100%;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+}
+
+* {
+  box-sizing: border-box;
+}

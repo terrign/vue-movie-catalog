@@ -1,0 +1,4 @@
+const API_ITEMS_PER_PAGE = 10
+const ITEMS_PER_PAGE = 8
+
+export { API_ITEMS_PER_PAGE, ITEMS_PER_PAGE }
