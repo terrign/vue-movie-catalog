@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import type { TMovie } from "@/api/types"
+import Img from "@/assets/imageplaceholder.png"
+import { isImageUrl } from "@/utils"
 
 const { movie } = defineProps<{ movie: TMovie }>()
 const { Poster, Year, Title, Type, imdbID } = movie
+
+const hasImage = isImageUrl(Poster)
+
+const imageSource = hasImage ? Poster : Img
+
+const imageClasses = `image ${!hasImage && "placeholder"}`
 </script>
 
 <template>
   <div class="card">
     <div class="image-container">
-      <img :src="Poster" class="image" height="240" width="160" />
+      <img :src="imageSource" :class="imageClasses" height="240" width="160" />
     </div>
     <ul class="desc">
       <li>Name: {{ Title }}</li>
@@ -47,6 +55,10 @@ const { Poster, Year, Title, Type, imdbID } = movie
   height: 240px;
   object-fit: contain;
   object-position: center;
+}
+
+.placeholder {
+  object-fit: cover;
 }
 
 .desc {
