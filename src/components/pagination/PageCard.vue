@@ -1,22 +1,31 @@
 <script setup lang="ts">
 import type { TMovie } from "@/api/types"
-import Img from "@/assets/imagePlaceHolder.png"
-import { isImageUrl } from "@/utils"
+import FallbackImage from "@/assets/imagePlaceHolder.png"
+import { ref } from "vue"
 
 const { movie } = defineProps<{ movie: TMovie }>()
 const { Poster, Year, Title, Type, imdbID } = movie
 
-const hasImage = isImageUrl(Poster)
+const imageSource = ref(Poster)
 
-const imageSource = hasImage ? Poster : Img
+const imageClasses = ref("image")
 
-const imageClasses = `image ${!hasImage && "placeholder"}`
+const imageErrorHandler = () => {
+  imageSource.value = FallbackImage
+  imageClasses.value += " placeholder"
+}
 </script>
 
 <template>
   <div class="card">
     <div class="image-container">
-      <img :src="imageSource" :class="imageClasses" height="240" width="160" />
+      <img
+        :src="imageSource"
+        :class="imageClasses"
+        height="240"
+        width="160"
+        @error="imageErrorHandler"
+      />
     </div>
     <ul class="desc">
       <li>Name: {{ Title }}</li>

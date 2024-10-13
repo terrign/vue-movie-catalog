@@ -117,6 +117,4 @@ const normalizePagesNav = ({
   return [...start, spaceSymbol, ...left, currentPage, ...right, spaceSymbol, ...end]
 }
 
-const isImageUrl = (url: string) => url.startsWith("https://")
-
-export { debounce, memoized, resolvePagesToFetch, createArray, normalizePagesNav, isImageUrl }
+export { debounce, memoized, resolvePagesToFetch, createArray, normalizePagesNav }
