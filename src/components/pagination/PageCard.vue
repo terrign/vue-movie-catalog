@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TMovie } from "@/api/types"
-import Img from "@/assets/imageplaceholder.png"
+import Img from "@/assets/imagePlaceHolder.png"
 import { isImageUrl } from "@/utils"
 
 const { movie } = defineProps<{ movie: TMovie }>()
