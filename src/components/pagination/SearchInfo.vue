@@ -19,4 +19,10 @@ defineProps<{
 .search-info {
   height: 1.5rem;
 }
+
+@media screen and (max-width: 576px) {
+  .search-info {
+    text-align: center;
+  }
+}
 </style>

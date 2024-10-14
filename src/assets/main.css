@@ -9,15 +9,34 @@
   --header-bg: var(--color-light-blue);
   --button-hover: var(--color-light-blue);
   --inactive-button-color: var(--color-gray);
-  --content-horizontal-padding: 3rem;
   --border-light: var(--color-light-gray);
   --border-dark: var(--color-gray);
+  --content-horizontal-padding: 3rem;
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --content-horizontal-padding: 1rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
 }
 
 body {
-  min-height: 100vh;
   max-width: 1280px;
-  height: 1px;
   line-height: 1rem;
   margin: 0 auto;
   font-family:
@@ -35,10 +54,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-#app {
-  height: 100%;
+  padding: var(--sat) var(--sar) var(--sab) var(--sal);
 }
 
 h1,
@@ -56,6 +73,18 @@ h2 {
   font-size: 1.5rem;
   line-height: 1.5rem;
   font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+  }
 }
 
 * {

@@ -74,7 +74,7 @@ const imageErrorHandler = () => {
   flex: 1 1 auto;
   margin: 0.5rem 0 0;
   word-wrap: break-word;
-  padding: 0;
+  padding-left: 5px;
   width: 100%;
 }
 
@@ -82,6 +82,37 @@ const imageErrorHandler = () => {
   list-style: none;
   margin: 0;
   font-size: 0.8rem;
-  word-break: break-all;
+}
+
+@media screen and (max-width: 425px) {
+  .card {
+    width: 100%;
+  }
+
+  .desc {
+    max-width: 300px;
+    flex: 0 0 auto;
+  }
+
+  .image-container {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .image {
+    flex: 2 1 auto;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .desc > li {
+    font-size: 1rem;
+  }
+
+  .placeholder {
+    object-fit: fill;
+  }
 }
 </style>

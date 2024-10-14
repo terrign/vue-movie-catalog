@@ -14,10 +14,12 @@ const updateQuery = debounce(() => {
 })
 
 watch(searchQuery, updateQuery)
+
+const { className } = defineProps<{ className?: string }>()
 </script>
 
 <template>
-  <app-input v-model="searchQuery" />
+  <app-input v-model="searchQuery" :className />
 </template>
 
 <style lang="css" scoped></style>

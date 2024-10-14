@@ -27,4 +27,27 @@ defineProps<{
   justify-content: space-between;
   padding: 1rem 0;
 }
+
+@media screen and (max-width: 768px) {
+  .page {
+    grid-template-columns: repeat(3, 170px);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .page {
+    grid-template-columns: repeat(2, 170px);
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .page {
+    display: block;
+  }
+
+  .page > * {
+    margin-top: 1rem;
+  }
+}
 </style>

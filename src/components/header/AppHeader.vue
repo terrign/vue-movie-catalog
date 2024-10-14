@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import UserInfo from "./UserInfo.vue"
-import MovieSearch from './MovieSearch.vue';
+import MovieSearch from "./MovieSearch.vue"
 </script>
 
 <template>
   <header class="header">
     <h1 class="title">Movie catalog</h1>
-    <movie-search />
+    <movie-search class-name="input" />
     <user-info />
   </header>
 </template>
@@ -23,5 +23,18 @@ import MovieSearch from './MovieSearch.vue';
 
 .title {
   flex-shrink: 0;
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .input {
+    margin: 0 auto;
+    max-width: 320px;
+    order: 1;
+  }
 }
 </style>

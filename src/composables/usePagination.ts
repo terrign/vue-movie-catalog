@@ -13,7 +13,7 @@ const usePagination = <
 >(
   paginatedDataFetch: (params: P) => Promise<T>,
   params: P,
-  itemsPerPage: number,
+  itemsPerPage: Ref<number>,
   apiItemsPerPage: number
 ) => {
   const { data, call, error } = useAsync(memoized(paginatedDataFetch))
@@ -22,20 +22,20 @@ const usePagination = <
   //isReady === true, when pages.value filled with proper amount of pages which correspondes to current search term
   const isReady: Ref<boolean> = ref<boolean>(false)
   const total = computed(() => ({
-    pages: Math.ceil((data.value?.total ?? 1) / itemsPerPage),
+    pages: Math.ceil((data.value?.total ?? 1) / itemsPerPage.value),
     results: data.value?.total ?? 0
   }))
   const currentPage = params.page
   const isLoading = ref<boolean>(false)
 
   const fillPage = async (pageNum: number) => {
-    if (pages.value[pageNum].length === itemsPerPage) {
+    if (pages.value[pageNum] && pages.value[pageNum].length === itemsPerPage.value) {
       return
     }
 
     isLoading.value = true
 
-    const promises = resolvePagesToFetch(pageNum, itemsPerPage, apiItemsPerPage).map(
+    const promises = resolvePagesToFetch(pageNum, itemsPerPage.value, apiItemsPerPage).map(
       ({ pageToFetch, startIndex }) =>
         call({ ...params, page: pageToFetch }).then((res) => {
           const data = res?.data
@@ -50,7 +50,7 @@ const usePagination = <
         pages.value[pageNum] = result
           .map((it) => (it.status === "fulfilled" ? it.value : []))
           .flat()
-          .slice(0, itemsPerPage)
+          .slice(0, itemsPerPage.value)
       })
       .finally(() => {
         isLoading.value = false
@@ -71,7 +71,7 @@ const usePagination = <
     //receive total amount without redundant data fetching
     call({
       ...params,
-      page: Math.ceil((itemsPerPage / apiItemsPerPage) * currentPage.value)
+      page: Math.ceil((itemsPerPage.value / apiItemsPerPage) * currentPage.value)
     })
       .then(() => {
         const newPages: Record<number, T["data"]> = {}
@@ -93,6 +93,7 @@ const usePagination = <
 
   watch(params.s, init, { immediate: true })
   watch(params.page, fillPage)
+  watch(itemsPerPage, init)
 
   const setPage = (newPage: number) => {
     if (newPage < 1 || newPage > total.value.pages) {

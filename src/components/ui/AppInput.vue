@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-const model = defineModel()
+import { computed } from "vue"
 
-defineOptions({
-  inheritAttrs: false
-})
+const model = defineModel()
+const { className } = defineProps<{ className?: string }>()
+
+const classNames = computed(() => `search ${className}`)
 </script>
 
 <template>
-  <input type="text" class="search" placeholder="Search" v-model="model" v-bind="$attrs" />
+  <input type="text" :class="classNames" placeholder="Search" v-model="model" />
 </template>
 
 <style lang="css" scoped>

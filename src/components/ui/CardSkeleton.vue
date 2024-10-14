@@ -63,4 +63,25 @@
   font-size: 0.8rem;
   width: 100%;
 }
+
+@media screen and (max-width: 425px) {
+  .card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .image-container {
+    width: 100%;
+  }
+
+  .image {
+    width: 100%;
+    height: 450px;
+  }
+
+  .desc > li {
+    font-size: 1rem;
+  }
+}
 </style>

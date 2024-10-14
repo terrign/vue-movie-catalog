@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { width } from "@/store/width"
 import { normalizePagesNav } from "@/utils"
-import { computed } from "vue"
+import { computed, watch } from "vue"
 
 const { currentPage, totalPages } = defineProps<{
   next: () => void
@@ -10,12 +11,22 @@ const { currentPage, totalPages } = defineProps<{
   totalPages: number
 }>()
 
+const page = computed(() => currentPage)
+
 const pages = computed(() =>
   normalizePagesNav({
     currentPage,
     totalPages,
-    showPages: { fromCurrent: 2, edges: 2 }
+    showPages: { fromCurrent: width.value > 576 ? 2 : 1, edges: width.value > 576 ? 2 : 1 }
   })
+)
+
+watch(
+  page,
+  () => {
+    window.scrollTo({ top: 0 })
+  },
+  { immediate: true }
 )
 </script>
 
@@ -31,7 +42,7 @@ const pages = computed(() =>
       >
         {{ pageNum }}
       </button>
-      <span v-else class="empty">. . . .</span>
+      <span v-else class="empty">. . .</span>
     </template>
     <button @click="next" class="page-button" :data-inactive="currentPage === totalPages">
       &gt;
@@ -42,6 +53,7 @@ const pages = computed(() =>
 <style lang="css" scoped>
 .empty {
   line-height: 2rem;
+  white-space: nowrap;
 }
 .controls {
   display: flex;
@@ -73,8 +85,17 @@ const pages = computed(() =>
   font-weight: 300;
 }
 
-.page-button:hover:not([data-inactive="true"]):not([data-active="true"]) {
-  background-color: var(--button-hover);
-  cursor: pointer;
+@media (pointer: fine) {
+  .page-button:hover:not([data-inactive="true"]):not([data-active="true"]) {
+    background-color: var(--button-hover);
+    cursor: pointer;
+  }
+}
+
+@media (pointer: coarse) {
+  .page-button:active:not([data-inactive="true"]):not([data-active="true"]) {
+    background-color: var(--button-hover);
+    cursor: pointer;
+  }
 }
 </style>
